@@ -159,6 +159,17 @@ class FormMacros extends Object {
 
 	// </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="{container}">
+        public static function macroContainer($content) {
+            list($name, $modifiers) = self::fetchNameAndModifiers($content);
+            return "\$formContainer = FormMacros::container($name, $modifiers)";
+        }
+
+        public static function container($name, $modifiers = array()) {
+            return self::$form[$name]->components;
+        }
+        // </editor-fold>
+
 	// <editor-fold defaultstate="collapsed" desc="Helpers">
 
 	public static function register() {
@@ -176,6 +187,8 @@ class FormMacros extends Object {
 
 		LatteMacros::$defaultMacros["dynamicContainer"] = '<?php %FormMacros::macroBeginDynamicContainer% ?>';
 		LatteMacros::$defaultMacros["/dynamicContainer"] = '<?php %FormMacros::macroEndDynamicContainer% ?>';
+
+                LatteMacros::$defaultMacros["container"] = '<?php %FormMacros::macroContainer% ?>';
 	}
 
 	/**
@@ -222,6 +235,16 @@ class FormMacros extends Object {
 	}
 
 	protected static function applyModifiers(Html $element, array $modifiers) {
+                if (isset($modifiers["text"])) {
+                    $element->setText($modifiers["text"]);
+                    unset($modifiers["text"]);
+                }
+
+                if (isset($modifiers["class"])) {
+                    $element->class[] = $modifiers["class"];
+                    unset($modifiers["class"]);
+                }
+
 		foreach($modifiers as $key => $value)
 			$element->$key($value);
 	}
