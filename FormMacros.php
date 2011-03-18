@@ -229,7 +229,7 @@ class FormMacros extends Object {
 	protected static function fetchNameAndModifiers($content) {
 		$latteMacros = self::getLatteMacros();
 		$name = $latteMacros->fetchToken($content);
-		$name = String::startsWith($name, '$') ? $name : "'$name'";
+		$name = String::startsWith($name, '$') ? $name : "\"$name\"";
 		$modifiers = $latteMacros->formatArray($content);
 		$modifiers = $modifiers ? $modifiers : "array()";
 		return array($name, $modifiers);
