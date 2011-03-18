@@ -7,22 +7,6 @@
  * @license MIT
  */
 
-namespace Addons\Forms;
-
-// <editor-fold defaultstate="collapsed" desc="use">
-
-use \InvalidArgumentException;
-use \InvalidStateException;
-use Nette\Callback;
-use Nette\Forms\FormContainer;
-use Nette\Application\Presenter;
-use \LogicException;
-use Nette\ComponentContainer;
-use Nette\IComponent;
-use Nette\Forms\SubmitButton;
-
-// </editor-fold>
-
 class DynamicContainer extends DynamicContainerCore {
 
 	// <editor-fold defaultstate="collapsed" desc="variables">
@@ -79,7 +63,7 @@ class DynamicContainer extends DynamicContainerCore {
 			throw new InvalidStateException("Button options have to be set before factory is set and form is attached !");
 		$this->addButtonOptions = array($enable, $label, $name);
 		if ($enable) {
-			if(!$this->lookup("Nette\Forms\FormContainer", false) === null)
+			if(!$this->lookup("FormContainer", false) === null)
 				$this->attachAddButton();
 		}
 		return $this;

@@ -7,19 +7,6 @@
  * @license MIT
  */
 
-namespace Addons\Forms;
-
-// <editor-fold defaultstate="collapsed" desc="use">
-
-use Nette\IComponentContainer;
-use Nette\IComponent;
-use Nette\Forms\FormContainer;
-use Nette\Application\Presenter;
-use \InvalidStateException;
-use \LogicException;
-
-// </editor-fold>
-
 class DynamicContainerCore extends FormContainer {
 
 	// <editor-fold defaultstate="collapsed" desc="variables">
