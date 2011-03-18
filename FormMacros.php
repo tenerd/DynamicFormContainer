@@ -34,13 +34,14 @@ class FormMacros extends Object {
 
 	public static function macroFormBegin($content) {
 		list($name, $modifiers) = self::fetchNameAndModifiers($content);
-		return "FormMacros::formBegin($name, \$control, $modifiers)";
+		return "\$formErrors = FormMacros::formBegin($name, \$control, $modifiers)->getErrors()";
 	}
 	public static function formBegin($form, $control, $modifiers) {
 		$form = ($form instanceof Form) ? $form : $control[$form];
 		self::$stack = array($form);
 		self::applyModifiers($form->getElementPrototype(), $modifiers);
 		$form->render("begin");
+                return $form;
 	}
 
 	public static function macroFormEnd($content) {
